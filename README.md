@@ -1,6 +1,6 @@
 # Airport Arrivals And Departures Information
 
-- ✈️ Use this [web application]() to view the arrivals and departures of an airport!
+- ✈️ Use this [web application](https://vincenttsengca.github.io/airport-arrivals-and-departures-information/) to view the arrivals and departures of an airport!
 
 - 🌐 Enter an airport ICAO indentifier code in the search bar.
 
