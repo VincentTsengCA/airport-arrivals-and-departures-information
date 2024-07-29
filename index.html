@@ -102,6 +102,11 @@
             text-align: center;
             font-weight: bold;
             font-size: 65%;
+            text-decoration: underline;
+        }
+
+        .LinkToFindICAO:hover {
+            cursor: pointer;
         }
 
         .FilterOption {
@@ -262,9 +267,13 @@
 
         <div style="text-align: center;">
             <a class="LinkToFindICAO" href="https://en.wikipedia.org/wiki/List_of_airports_by_ICAO_code:_A" target="_blank">Find Your Airport's ICAO Code</a>
+            <br>
+            <a style="color: rgba(255, 255, 255, 0.8); text-align: center; font-weight: bold; font-size: 65%;">or</a>
+            <br>
+            <a class="LinkToFindICAO" onclick="onRandomSearchClicked()">Random Search!</a>
         </div>
 
-        <div style="height: 4em;"></div>
+        <div style="height: 3em;"></div>
     </div>
 
     <div id="FilterOptionsContainer" class="MainContainer" style="display: none; max-width: 18em; text-align: center; border-radius: 1.25em; margin-top: 2em; padding: 1em;">

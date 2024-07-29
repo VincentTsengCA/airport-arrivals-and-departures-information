@@ -8,6 +8,7 @@
 // "Bringing Up OpenSky: A Large-scale ADS-B Sensor Network for Research". //
 // In Proceedings of the 13th IEEE/ACM International Symposium on Information Processing in Sensor Networks (IPSN), pages 83-94, April 2014. //
 
+const randomAirportSearches = ["CYYZ", "KORD", "KATL", "EGLL", "KLAX", "VIDP", "MMMX", "LFPG", "RJTT", "WIII"];
 const currentHour = new Date().getHours();
 
 if (currentHour >= 6 && currentHour <= 19) {
@@ -181,6 +182,7 @@ async function searchAirport(searchValue = searchBarElement.value.trim().toUpper
     filterOptionsContainer.style.display = "block";
     searchingLabel.style.display = "unset";
 
+    searchBarElement.blur();
     window.scrollTo(0, 450);
 
     await getAirportInformation(arrivalsURL, searchValue);
@@ -294,6 +296,16 @@ function onNavigationDeparturesClicked() {
         window.scrollTo(0, 350);
         setFilterOption("DeparturesFilterOption", true);
     }
+}
+
+function onRandomSearchClicked() {
+    let originalSearchValue = searchBarElement.value;
+
+    while (searchBarElement.value == originalSearchValue) {
+        searchBarElement.value = randomAirportSearches[Math.floor(Math.random() * randomAirportSearches.length)];
+    }
+    
+    searchAirport();
 }
 
 function onSearchBarFocus() {
