@@ -26,7 +26,6 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-position-x: center;
-            height: auto;
             font-family: sans-serif;
             font-size: 150%;
             margin: 0em;
@@ -239,6 +238,35 @@
 
         .Footer p {
             font-size: 70%;
+        }
+
+        @media (width < 800px) {
+            body {
+                font-size: 130%;
+            }
+
+            .NavigationBar a {
+                font-size: 90%;
+            }
+
+            .NavigationBar a:nth-child(1) {
+                display: none;
+            }
+
+            .SearchBar {
+                min-width: 75%;
+            }
+
+            .TopResultsContainer, .LeftResultsContainer, .RightResultsContainer, .BottomResultsContainer {
+                text-align: center;
+                display: block;
+                width: 100%;
+                margin-bottom: 1em;
+            }
+
+            .TopResultsContainer, .BottomResultsContainer {
+                margin-bottom: 0em;
+            }
         }
     </style>
 

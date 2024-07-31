@@ -8,7 +8,7 @@
 // "Bringing Up OpenSky: A Large-scale ADS-B Sensor Network for Research". //
 // In Proceedings of the 13th IEEE/ACM International Symposium on Information Processing in Sensor Networks (IPSN), pages 83-94, April 2014. //
 
-const randomAirportSearches = ["CYYZ", "KORD", "KATL", "EGLL", "KLAX", "VIDP", "MMMX", "LFPG", "RJTT", "WIII"];
+const randomAirportSearches = ["CYYZ", "KORD", "KATL", "EGLL", "KLAX", "VIDP", "MMMX", "LFPG", "RJTT", "CYVR"];
 const currentHour = new Date().getHours();
 
 if (currentHour >= 6 && currentHour <= 19) {
@@ -52,7 +52,7 @@ async function getAirportInformation(URL = arrivalsURL, airport = "") {
         const response = await fetch(URL + getParameterString(airport));
         
         if (!response.ok) {
-            throw new Error("Invalid Airport ICAO Indentifier: " + airport);
+            throw new Error("Invalid Airport ICAO Indentifier: " + airport + "\n(Unable To Fetch " + flightType + "s)");
         }
 
         const data = await response.json();
