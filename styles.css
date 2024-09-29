@@ -236,6 +236,7 @@ h1, h2 {
 @media only screen and (max-width: 800px) {
     body {
         font-size: 130%;
+        z-index: 0;
     }
 
     body:before {
