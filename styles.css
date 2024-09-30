@@ -244,14 +244,22 @@ h1, h2 {
         position: fixed;
         left: 0;
         top: 0;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
         z-index: -1;
         background: linear-gradient(transparent, rgb(13, 0, 49)), url("images/AirportMorning.JPG") no-repeat center center;
         background-size: cover;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
+    }
+
+    #Morning:before {
+        background: linear-gradient(transparent, rgb(13, 0, 49)), url("images/AirportMorning.JPG") no-repeat center center;
+    }
+    
+    #Night:before {
+        background: linear-gradient(transparent, rgb(13, 0, 49)), url("images/AirportNight.JPG") no-repeat center center;
     }
 
     h1, h2 {

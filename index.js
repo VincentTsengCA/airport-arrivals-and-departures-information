@@ -12,10 +12,12 @@ const randomAirportSearches = ["CYYZ", "KORD", "KATL", "EGLL", "KLAX", "VIDP", "
 const currentHour = new Date().getHours();
 
 if (currentHour >= 6 && currentHour <= 19) {
+    document.body.id = "Morning";
     document.body.style.backgroundImage = "linear-gradient(transparent, rgb(13, 0, 49)), url('images/AirportMorning.JPG')";
 }
 
 else {
+    document.body.id = "Night";
     document.body.style.backgroundImage = "linear-gradient(transparent, rgb(13, 0, 49)), url('images/AirportNight.JPG')";
 }
 
