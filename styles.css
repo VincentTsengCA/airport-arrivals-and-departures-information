@@ -151,6 +151,8 @@ h1, h2 {
     padding: 1.5em;
     height: fit-content;
     user-select: text;
+    scale: 1;
+    transition: linear 0.3s;
 }
 
 .SearchResultsItem:hover {
