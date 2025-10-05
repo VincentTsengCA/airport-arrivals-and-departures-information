@@ -52,9 +52,23 @@ async function getAirportInformation(URL = arrivalsURL, airport = "") {
     
     try {
         const response = await fetch(URL + getParameterString(airport));
-        
+
         if (!response.ok) {
-            throw new Error("Invalid Airport ICAO Indentifier: " + airport + "\n(Unable To Fetch " + flightType + "s)");
+            let errorMessage = "Unable To Fetch " + flightType + "s For " + airport + ".";
+            
+            if (response.status == 404) {
+                errorMessage += "\n(Invalid Airport ICAO Identifier Or No Flights Found)"
+            }
+
+            else if (response.status == 429) {
+                errorMessage += "\n(Too Many Requests - Try Again Later)"
+            }
+
+            else {
+                errorMessage += "\n(No Flights Found)"
+            }
+            
+            throw new Error(errorMessage);
         }
 
         const data = await response.json();
@@ -67,14 +81,16 @@ async function getAirportInformation(URL = arrivalsURL, airport = "") {
     }
 
     catch(error) {
-        alert(error);
-
         noFlightsFoundLabel.style.display = "unset";
         searchingLabel.style.display = "none";
+
+        return error;
     }
+
+    return null;
 }
 
-function getParameterString(airport = "CYYZ", begin = getCurrentUnixTime() - 259200, end = getCurrentUnixTime()) {
+function getParameterString(airport = "CYYZ", begin = getCurrentUnixTime() - 43200, end = getCurrentUnixTime()) {
     return "airport=" + airport + "&begin=" + begin.toString() + "&end=" + end.toString();
 }
 
@@ -171,6 +187,11 @@ function handleUserInput(event) {
 }
 
 async function searchAirport(searchValue = searchBarElement.value.trim().toUpperCase()) {
+    if (searchValue.length != 4) {
+        alert("Note: Your Search Must Be An Airport's 4-Letter ICAO Code.\n\nUnsure Of Your Airport's Code?\nClick \"Find Your Airport's ICAO Code\" Below!");
+        return;
+    }
+
     let existingSearchResultsItems = document.getElementsByClassName("SearchResultsItem");
     
     for (let i = existingSearchResultsItems.length - 1; i > -1; i--) {
@@ -187,14 +208,19 @@ async function searchAirport(searchValue = searchBarElement.value.trim().toUpper
     searchBarElement.blur();
     window.scrollTo(0, 450);
 
-    await getAirportInformation(arrivalsURL, searchValue);
+    const arrivalsError = await getAirportInformation(arrivalsURL, searchValue);
     filterResults();
 
     noFlightsFoundLabel.style.display = "none";
     searchingLabel.style.display = "unset";
     
-    await getAirportInformation(departuresURL, searchValue);
+    const departuresError = await getAirportInformation(departuresURL, searchValue);
     filterResults();
+
+    if (arrivalsError != null && departuresError != null) {
+        alert(arrivalsError);
+        alert(departuresError);
+    }
 }
 
 function updateSearchingLabel() {
